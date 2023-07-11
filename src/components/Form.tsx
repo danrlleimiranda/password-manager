@@ -10,6 +10,11 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
     showForm(false);
   }
 
+  const validClass = 'valid-password-check';
+  const invalidClass = 'invalid-password-check';
+  const regexLetterAndNumber = /^(?=.*[0-9])(?=.*[a-zA-Z])/;
+  const regexSpecial = /^(?=.*[@!#$%^&*()/\\])/;
+
   const [formValue, setFormValue] = useState({ serviço: '',
     login: '',
     senha: '',
@@ -65,6 +70,34 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
           value={ formValue.senha }
           onChange={ (event) => handleChange(event) }
         />
+        <p
+          className={ formValue.senha.length < 8
+            ? invalidClass : validClass }
+        >
+          Possuir 8 ou mais caracteres
+
+        </p>
+        <p
+          className={ formValue.senha.length < 16
+            ? validClass : invalidClass }
+        >
+          Possuir até 16 caracteres
+
+        </p>
+        <p
+          className={ regexLetterAndNumber.test(formValue.senha) === false
+            ? invalidClass : validClass }
+        >
+          Possuir letras e números
+
+        </p>
+        <p
+          className={ regexSpecial.test(formValue.senha) === false
+            ? invalidClass : validClass }
+        >
+          Possuir algum caractere especial
+
+        </p>
       </label>
       <label htmlFor="url">
         url
