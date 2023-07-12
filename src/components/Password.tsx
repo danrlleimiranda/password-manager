@@ -6,13 +6,15 @@ type PasswordProps = {
     login: string;
     senha: string;
     url: string;
-  }
+  },
+  handleDelete: (() => void) | undefined
 };
 
-export function Password(props:PasswordProps) {
-  const { serviceInfo } = props;
+export function Password({ serviceInfo, handleDelete }: PasswordProps) {
   return (
     <div>
+      {handleDelete
+      && <button data-testid="remove-btn" onClick={ handleDelete }>X</button>}
       <a
         href={ serviceInfo.url }
         target="_blank"

@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import { T } from 'vitest/dist/types-e3c9754d';
+// import { T } from 'vitest/dist/types-e3c9754d';
 import { Header } from './components/Header';
 import { Form, RegisterType } from './components/Form';
 import { Button } from './components/Button';
@@ -23,6 +23,11 @@ function App() {
     setRegisterValue(state);
   }
 
+  const handleDelete = (service: string) => {
+    setRegisterValue(registerValue
+      .filter((value:RegisterType) => value.serviço !== service));
+  };
+
   return (
     <div>
       <Header />
@@ -37,7 +42,10 @@ function App() {
       && <Button onClick={ () => setShowForm(true) } />}
       {registerValue.length === 0
         ? <h2>Nenhuma senha cadastrada</h2>
-        : <PasswordList registerValue={ [...registerValue] } /> }
+        : <PasswordList
+            registerValue={ [...registerValue] }
+            handleDelete={ handleDelete }
+        /> }
     </div>
   );
 }
