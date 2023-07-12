@@ -7,10 +7,11 @@ type PasswordProps = {
     senha: string;
     url: string;
   },
-  handleDelete: (() => void) | undefined
+  handleDelete: (() => void) | undefined,
+  checkbox: boolean
 };
 
-export function Password({ serviceInfo, handleDelete }: PasswordProps) {
+export function Password({ serviceInfo, handleDelete, checkbox }: PasswordProps) {
   return (
     <div>
       {handleDelete
@@ -24,7 +25,7 @@ export function Password({ serviceInfo, handleDelete }: PasswordProps) {
 
       </a>
       <p>{serviceInfo.login}</p>
-      <p>{ serviceInfo.senha }</p>
+      { checkbox ? <span>******</span> : <p>{ serviceInfo.senha }</p>}
     </div>
   );
 }
