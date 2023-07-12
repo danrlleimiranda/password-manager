@@ -19,6 +19,7 @@ export function PasswordList({ registerValue, handleDelete }:PasswordListProps) 
         <input
           type="checkbox"
           id="hide-password"
+          className="hide-password"
           onClick={ () => {
             setCheckbox(!checkbox);
           } }
