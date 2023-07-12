@@ -1,10 +1,23 @@
 import React, { HtmlHTMLAttributes, useState } from 'react';
+import { S } from 'vitest/dist/types-e3c9754d';
 
 type ButtonPropsType = {
-  showForm: (state:boolean) => void
-} & HtmlHTMLAttributes<HTMLButtonElement>;
+  showForm: (state:boolean) => void;
+  setFormValue: (state:RegisterType) => void;
+  setRegisterValue: (state:any) => void;
+  formValue: RegisterType;
+  registerValue: RegisterType[];
+};
 
-export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
+export type RegisterType = {
+  serviço: string,
+  login: string,
+  senha: string,
+  url: string
+};
+
+export function Form({ showForm, setFormValue,
+  formValue, setRegisterValue, registerValue }: ButtonPropsType) {
   function handleCancelButton(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     event.preventDefault();
     showForm(false);
@@ -14,11 +27,10 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
   const invalidClass = 'invalid-password-check';
   const regexLetterAndNumber = /^(?=.*[0-9])(?=.*[a-zA-Z])/;
   const regexSpecial = /^(?=.*[@!#$%^&*()/\\])/;
-
-  const [formValue, setFormValue] = useState({ serviço: '',
+  const initialState = { serviço: '',
     login: '',
     senha: '',
-    url: '' });
+    url: '' };
 
   function handleChange({ target }:React.ChangeEvent<HTMLInputElement>) {
     setFormValue({
@@ -26,6 +38,12 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
       [target.id]: target.value,
     });
   }
+  function handleRegister(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    event.preventDefault();
+    setRegisterValue([...registerValue, { ...formValue }]);
+    setFormValue(initialState);
+  }
+  console.log(registerValue);
 
   function isValid() {
     const regex = /^(?=.*[@!#$%^&*()/\\])(?=.*[0-9])(?=.*[a-zA-Z])[@!#$%^&*()/\\a-zA-Z0-9]{8,16}$/;
@@ -42,6 +60,7 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
   }
 
   return (
+
     <form>
       <label htmlFor="serviço">
         Nome do Serviço
@@ -108,9 +127,20 @@ export function Form({ showForm }: ButtonPropsType, props:ButtonPropsType) {
           onChange={ (event) => handleChange(event) }
         />
       </label>
-      <button disabled={ isValid() } type="submit">Cadastrar</button>
+      <button
+        disabled={ isValid() }
+        type="submit"
+        onClick={ (event) => {
+          handleRegister(event);
+          showForm(false);
+        } }
+      >
+        Cadastrar
+
+      </button>
       <button onClick={ (event) => handleCancelButton(event) }>Cancelar</button>
 
     </form>
+
   );
 }
