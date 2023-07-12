@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { S } from 'vitest/dist/types-e3c9754d';
 
 type ButtonPropsType = {
@@ -23,6 +23,8 @@ export function Form({ showForm, setFormValue,
     showForm(false);
   }
 
+  const [inputType, setInputType] = useState('password');
+
   const validClass = 'valid-password-check';
   const invalidClass = 'invalid-password-check';
   const regexLetterAndNumber = /^(?=.*[0-9])(?=.*[a-zA-Z])/;
@@ -43,7 +45,15 @@ export function Form({ showForm, setFormValue,
     setRegisterValue([...registerValue, { ...formValue }]);
     setFormValue(initialState);
   }
-  console.log(registerValue);
+
+  const handleShowPassword = (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    if (inputType === 'password') {
+      setInputType('text');
+    } else {
+      setInputType('password');
+    }
+  };
 
   function isValid() {
     const regex = /^(?=.*[@!#$%^&*()/\\])(?=.*[0-9])(?=.*[a-zA-Z])[@!#$%^&*()/\\a-zA-Z0-9]{8,16}$/;
@@ -81,14 +91,22 @@ export function Form({ showForm, setFormValue,
           onChange={ (event) => handleChange(event) }
         />
       </label>
+
       <label htmlFor="senha">
         Senha
         <input
-          type="password"
+          type={ inputType }
           id="senha"
           value={ formValue.senha }
           onChange={ (event) => handleChange(event) }
         />
+        <button
+          data-testid="show-hide-form-password"
+          onClick={ (event) => handleShowPassword(event) }
+        >
+          Esconder/Mostrar senha
+
+        </button>
         <p
           className={ formValue.senha.length < 8
             ? invalidClass : validClass }
@@ -118,6 +136,7 @@ export function Form({ showForm, setFormValue,
 
         </p>
       </label>
+
       <label htmlFor="url">
         url
         <input
