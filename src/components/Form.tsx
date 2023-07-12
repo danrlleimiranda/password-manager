@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 // import { S } from 'vitest/dist/types-e3c9754d';
+import Swal from 'sweetalert2';
 
 type ButtonPropsType = {
   showForm: (state:boolean) => void;
@@ -68,6 +69,16 @@ export function Form({ showForm, setFormValue,
 
     return boolean;
   }
+
+  const registerConcluded = () => {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Serviço cadastrado com sucesso',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   return (
 
@@ -152,12 +163,18 @@ export function Form({ showForm, setFormValue,
         onClick={ (event) => {
           handleRegister(event);
           showForm(false);
+          registerConcluded();
         } }
       >
         Cadastrar
 
       </button>
-      <button onClick={ (event) => handleCancelButton(event) }>Cancelar</button>
+      <button
+        onClick={ (event) => handleCancelButton(event) }
+      >
+        Cancelar
+
+      </button>
 
     </form>
 
