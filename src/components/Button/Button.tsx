@@ -1,4 +1,5 @@
 import React, { HtmlHTMLAttributes } from 'react';
+import './Button.css';
 
 export function Button(
   props: HtmlHTMLAttributes<HTMLButtonElement>,

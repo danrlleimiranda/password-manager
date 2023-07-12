@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Password } from './Password';
+import { Password } from '../Password';
+import './PasswordList.css';
 
 type PasswordListProps = {
   registerValue: { serviço: string,
@@ -11,9 +12,10 @@ type PasswordListProps = {
 export function PasswordList({ registerValue, handleDelete }:PasswordListProps) {
   const [checkbox, setCheckbox] = useState(false);
   return (
-    <div>
+    <div className="password-box">
+
       <label htmlFor="hide-password">
-        Esconder senhas
+        <span className="hide">Esconder senhas</span>
         <input
           type="checkbox"
           id="hide-password"
@@ -21,9 +23,9 @@ export function PasswordList({ registerValue, handleDelete }:PasswordListProps) 
             setCheckbox(!checkbox);
           } }
         />
-
       </label>
-      <ul>
+
+      <ul className="password-list">
         {registerValue.map((value) => (
           <li key={ value.serviço }>
             <Password

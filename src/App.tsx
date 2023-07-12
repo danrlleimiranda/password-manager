@@ -1,10 +1,9 @@
 import './App.css';
 import { useState } from 'react';
-// import { T } from 'vitest/dist/types-e3c9754d';
-import { Header } from './components/Header';
-import { Form, RegisterType } from './components/Form';
-import { Button } from './components/Button';
-import { PasswordList } from './components/PasswordList';
+import { Header } from './components/Header/Header';
+import { Form, RegisterType } from './components/Form/Form';
+import { Button } from './components/Button/Button';
+import { PasswordList } from './components/PasswordList/PasswordList';
 
 function App() {
   const initialState = { serviço: '',
@@ -29,7 +28,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       <Header />
       {showForm && <Form
         showForm={ setShowForm }
@@ -39,7 +38,7 @@ function App() {
         registerValue={ registerValue }
       />}
       {!showForm
-      && <Button onClick={ () => setShowForm(true) } />}
+      && <Button onClick={ () => setShowForm(true) } className="register-button" />}
       {registerValue.length === 0
         ? <h2>Nenhuma senha cadastrada</h2>
         : <PasswordList

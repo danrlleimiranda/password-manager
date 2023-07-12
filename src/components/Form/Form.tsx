@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import { S } from 'vitest/dist/types-e3c9754d';
 import Swal from 'sweetalert2';
+import './Form.css';
 
 type ButtonPropsType = {
   showForm: (state:boolean) => void;
@@ -85,32 +86,43 @@ export function Form({ showForm, setFormValue,
     <form>
       <label htmlFor="serviço">
         Nome do Serviço
+        {' '}
+        <br />
         <input
           type="text"
           id="serviço"
           name="serviço"
           value={ formValue.serviço }
+          placeholder="Digite aqui a plataforma"
           onChange={ (event) => handleChange(event) }
         />
       </label>
       <label htmlFor="login">
         Login
+        {' '}
+        <br />
         <input
           type="text"
           id="login"
           value={ formValue.login }
+          placeholder="Digite o seu login de acesso"
           onChange={ (event) => handleChange(event) }
         />
       </label>
 
       <label htmlFor="senha">
         Senha
+        {' '}
+        <br />
         <input
           type={ inputType }
           id="senha"
           value={ formValue.senha }
+          placeholder="Digite o sua senha de acesso"
           onChange={ (event) => handleChange(event) }
         />
+        {' '}
+        <br />
         <button
           data-testid="show-hide-form-password"
           onClick={ (event) => handleShowPassword(event) }
@@ -150,31 +162,36 @@ export function Form({ showForm, setFormValue,
 
       <label htmlFor="url">
         url
+        {' '}
+        <br />
         <input
           type="text"
           id="url"
           value={ formValue.url }
+          placeholder="Digite o endereço da plataforma"
           onChange={ (event) => handleChange(event) }
         />
       </label>
-      <button
-        disabled={ isValid() }
-        type="submit"
-        onClick={ (event) => {
-          handleRegister(event);
-          showForm(false);
-          registerConcluded();
-        } }
-      >
-        Cadastrar
+      <div className="formButtons">
+        <button
+          disabled={ isValid() }
+          type="submit"
+          onClick={ (event) => {
+            handleRegister(event);
+            showForm(false);
+            registerConcluded();
+          } }
+        >
+          Cadastrar
 
-      </button>
-      <button
-        onClick={ (event) => handleCancelButton(event) }
-      >
-        Cancelar
+        </button>
+        <button
+          onClick={ (event) => handleCancelButton(event) }
+        >
+          Cancelar
 
-      </button>
+        </button>
+      </div>
 
     </form>
 

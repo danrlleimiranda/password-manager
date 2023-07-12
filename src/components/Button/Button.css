@@ -1,0 +1,14 @@
+button {
+  background-color: rgb(77, 99, 81);
+  border: none;
+  border-radius: 5px;
+  color: aliceblue;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 1s ease;
+}
+
+button:hover {
+  background-color: rgb(99, 129, 105);
+  transition: all 1s ease;
+}

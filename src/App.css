@@ -5,3 +5,15 @@
 .invalid-password-check {
   color: #f58989;
 }
+
+h2 {
+  color: rgb(174, 201, 179);
+  margin-top: 100px;
+  text-align: center;
+}
+
+.App {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
